@@ -1,0 +1,45 @@
+server:
+  port: 5010
+spring:
+  application:
+    name: ackothon
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQL10Dialect
+        temp:
+          use_jdbc_metadata_defaults: false
+  jackson:
+    serialization:
+      write_dates_as_timestamps: false
+      write_enums_using_to_string: true
+    deserialization:
+      read_enums_using_to_string: true
+      accept_float_as_int: false
+      fail_on_unknown_properties: false
+      read_unknown_enum_values_using_default_value: true
+    mapper:
+      accept_case_insensitive_enums: true
+    default-property-inclusion: non_null
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+
+management:
+  metrics:
+    export:
+      datadog:
+        api-key: root
+
+
+---
+spring:
+  config:
+    activate:
+      on-profile: local
+
+server:
+  port: 5010
+  error:
+    include-message: always
+    include-binding-errors: always
+

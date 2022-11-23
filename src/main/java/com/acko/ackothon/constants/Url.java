@@ -7,5 +7,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class Url {
     public static final String GET_WORD_MEANING = "/ackothon/{word}";
+    public static final String GET_INTERNAL_INFO = "/ackothon/internal/{word}";
 
 }

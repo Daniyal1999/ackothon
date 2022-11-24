@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.jsoup.nodes.Document;
 
+import java.net.URLEncoder;
+
 @FeignClient(value="google-search-api", url= "https://www.google.com")
 public interface GoogleClient {
 

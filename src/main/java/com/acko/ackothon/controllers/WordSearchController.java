@@ -20,5 +20,4 @@ public class WordSearchController {
         return ResponseEntity.ok(wordSearchService.searchWordMeaning(word));
     }
 
-
 }

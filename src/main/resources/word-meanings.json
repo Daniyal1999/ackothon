@@ -1,0 +1,16 @@
+{
+  "dictionary": [
+    {
+      "key": "copay",
+      "definition": "In simple language, copay, also referred to as coinsurance in health insurance means the percentage of the admissible claim amount that you need to bear during claim settlement."
+    },
+    {
+      "key": "topup",
+      "definition": "The Top-up insurance plan provides insurance coverage by replenishing the sum insured up to a certain amount. Once the medical expenses cross the deductible limit, the Top-up plan gets activated."
+    },
+    {
+      "key": "super topup",
+      "definition": "After the medical costs exceed the threshold limit, this top-up plan provides additional insurance coverage. While the Top-up plan considers the threshold limit/deductible for every claim, the Super Top-up plan considers all the claims put together in a policy period."
+    }
+  ]
+}

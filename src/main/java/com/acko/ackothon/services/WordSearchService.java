@@ -2,18 +2,16 @@ package com.acko.ackothon.services;
 
 import com.acko.ackothon.clients.GoogleClient;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
+import lombok.SneakyThrows;
+import org.json.JSONObject;
+import org.json.simple.JSONArray;
+import org.json.simple.parser.JSONParser;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
-
-import java.util.HashSet;
-import java.util.Set;
-
+import org.json.JSONTokener;
+import java.io.FileReader;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -21,23 +19,25 @@ public class WordSearchService {
 
     private final GoogleClient googleClient;
 
-    public ResponseEntity searchWordMeaning(String word){
-        String searchString = "define" + word;
-        System.out.println(searchString);
-
-//        Set<String> links = new HashSet<>();
-//        Document doc = googleClient.getResults(searchString);
-//        Elements elements = doc.select("a[href]");
-//        for (Element element : elements) {
-//            links.add(element.attr("href"));
-//        }
-//
-//        for (String url : links)
-//        {
-//            System.out.println(url);
-//        }
-        return ResponseEntity.ok("hello");
+    @SneakyThrows
+    public String searchWordMeaning(String word) {
+        JSONParser jsonParser = new JSONParser();
+        String result = "";
+        FileReader reader = new FileReader("src/main/resources/word-meanings.json");
+        org.json.simple.JSONObject json = (org.json.simple.JSONObject)jsonParser.parse(reader);
+        JSONArray jsonArray= (JSONArray)json.get("dictionary");
+        for (int i=0;i<jsonArray.size();i++){
+            org.json.simple.JSONObject entry= (org.json.simple.JSONObject)jsonArray.get(i);
+            String key = (String)entry.get("key");
+            if (key.equalsIgnoreCase(word)){
+                result = (String)entry.get("definition");
+                break;
+            }
+        }
+        return result.isBlank()?"Sorry, Failed to get response...":result;
     }
+
+
 
 
 }
